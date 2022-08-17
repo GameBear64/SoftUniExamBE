@@ -12,7 +12,7 @@ router.use('/auth', authPages);
 router.use(homePages);
 
 //user required
-router.use(auth);
+router.use(auth); //middleware
 router.use(homePages);
 router.use('/item', itemPages);
 router.use('/search', searchPages);

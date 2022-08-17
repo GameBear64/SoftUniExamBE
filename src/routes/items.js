@@ -10,7 +10,7 @@ router.get('/create', (req, res) => {
   res.render('create');
 });
 
-router.post('/create', isNotLogged, async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
     await Item.create({ ...req.body, author: req.userInSession });
   } catch (error) {
@@ -61,7 +61,7 @@ router.post('/delete/:id', async (req, res) => {
 });
 
 // === Action ===
-router.patch('/like/:id', async (req, res) => {
+router.post('/like/:id', async (req, res) => {
   let item = await PostModel.findOne({ _id: ObjectId(req.params.id) });
 
   await item.update({ $push: { likes: req.userInSession } }, { timestamps: false });
