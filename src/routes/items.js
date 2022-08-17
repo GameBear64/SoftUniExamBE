@@ -36,7 +36,7 @@ router.get('/edit/:id', async (req, res) => {
   res.render('edit', { ...item });
 });
 
-router.patch('/edit/:id', async (req, res) => {
+router.post('/edit/:id', async (req, res) => {
   let item = await PostModel.findOne({ _id: ObjectId(req.params.id) });
   if (item.owner != res.locals.user.userID) return;
 
@@ -51,7 +51,7 @@ router.patch('/edit/:id', async (req, res) => {
 });
 
 // === DELETE ===
-router.delete('/delete/:id', async (req, res) => {
+router.post('/delete/:id', async (req, res) => {
   let item = await PostModel.findOne({ _id: ObjectId(req.params.id) });
   if (item.owner != res.locals.user.userID) return;
 
