@@ -18,7 +18,7 @@ exports.auth = (req, res, next) => {
   next();
 };
 
-exports.isLogged = (req, res, next) => {
+exports.isLoggedIn = (req, res, next) => {
   if (res.locals.user) return res.redirect('/');
 
   next();

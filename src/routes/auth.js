@@ -1,15 +1,17 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 
-const { isLogged } = require('../middleware/auth');
+const { isLoggedIn } = require('../middleware/auth');
 const User = require('../models/User.js');
 
+//no auth required, don't redirect
 router.get('/logout', (req, res) => {
   res.clearCookie(process.env.COOKIE_NAME);
   res.redirect('/');
 });
 
-router.use(isLogged);
+//everything below will redirect if there is a user
+router.use(isLoggedIn);
 
 router.get('/login', (req, res) => {
   res.render('login');
