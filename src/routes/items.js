@@ -36,7 +36,7 @@ router.get('/edit/:id', async (req, res) => {
   res.render('edit', { ...item });
 });
 
-router.post('/edit/:id', async (req, res) => {
+router.patch('/edit/:id', async (req, res) => {
   let item = await PostModel.findOne({ _id: ObjectId(req.params.id) });
   if (item.owner != res.locals.user.userID) return;
 
@@ -51,7 +51,7 @@ router.post('/edit/:id', async (req, res) => {
 });
 
 // === DELETE ===
-router.get('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   let item = await PostModel.findOne({ _id: ObjectId(req.params.id) });
   if (item.owner != res.locals.user.userID) return;
 
@@ -61,7 +61,7 @@ router.get('/delete/:id', async (req, res) => {
 });
 
 // === Action ===
-router.post('/like/:id', async (req, res) => {
+router.patch('/like/:id', async (req, res) => {
   let item = await PostModel.findOne({ _id: ObjectId(req.params.id) });
 
   await item.update({ $push: { likes: req.userInSession } }, { timestamps: false });
