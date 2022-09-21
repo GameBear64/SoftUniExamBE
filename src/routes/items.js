@@ -66,7 +66,7 @@ router.post('/like/:id', async (req, res) => {
 
   await item.update({ $push: { likes: req.userInSession } }, { timestamps: false });
 
-  res.redirect(`/crypto/details/${req.params.id}`);
+  res.redirect(`/details/${req.params.id}`);
 });
 
 module.exports = router;
